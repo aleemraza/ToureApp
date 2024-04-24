@@ -1,0 +1,17 @@
+
+
+body{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+.paper{
+    padding: 20px;
+    height: 62vh;
+    width: 400px;
+    margin: 20px auto;
+  }
+  .loginimage{
+    height: 100px;
+    width: 100px;
+  }
