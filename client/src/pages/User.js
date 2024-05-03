@@ -60,6 +60,9 @@ const User = () => {
         try{
            const res = await fetch('http://127.0.0.1:8080/api/vi/users/'+userID,{
                 method:"DELETE",
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                },
             })
             if(!res.ok){
                 console.log("Show ERROR")

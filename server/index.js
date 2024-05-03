@@ -1,26 +1,31 @@
 //Server World Start
-const express = require('express')
+const express = require('express');
 const bodyParser = require('body-parser');
-const morgon = require('morgan')
-const cors = require('cors')
+const morgon = require('morgan');
+const cors = require('cors');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+const mangoSanitize = require('express-mongo-sanitize');
+const xxl_clean = require('xss-clean');
+const hpp = require('hpp');
 //routes defined 
-const toureRoutes  = require('./routes/tourRoutes')
-const userRoutes  = require('./routes/userRoutes')
-const postRoutes = require('./routes/postRoutes')
-const loginRoutes = require('./routes/loginRoutes')
-const resgisterRoutes = require('./routes/resgisterRoutes')
-const blogRoutes = require('./routes/blogRoutes')
-const reviewRoutes = require('./routes/reviewRoutes')
-const AppError = require('./utils/appError')
-const golobalErrorHandler = require('./controler/errorControler')
-const rateLimit = require('express-rate-limit')
-const helmet = require('helmet')
-const mangoSanitize = require('express-mongo-sanitize')
-const xxl_clean = require('xss-clean')
-const hpp = require('hpp')
+const toureRoutes  = require('./routes/tourRoutes');
+const userRoutes  = require('./routes/userRoutes');
+const postRoutes = require('./routes/postRoutes');
+const loginRoutes = require('./routes/loginRoutes');
+const resgisterRoutes = require('./routes/resgisterRoutes');
+const blogRoutes = require('./routes/blogRoutes');
+const bookingRoutes = require('./routes/bookingRoutes');
+const ftRoutes = require('./routes/featuretoureRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
+const AppError = require('./utils/appError');
+const golobalErrorHandler = require('./controler/errorControler');
+
 
 //App model run
 const app = express()
+app.use(cors())
+app.options('*', cors());
 
 app.use(helmet({
     crossOriginResourcePolicy: false,
@@ -31,7 +36,7 @@ const limiter = rateLimit({
     windowsMs: 60*60*100,
     message:"Too many request from this IP , please try again in 1 hours"
 })
-app.use(cors())
+// app.options('/api/v1/tours/:id', cors());
 app.use('/api', limiter)
 //body perser reading data from body
 app.use(express.json({limit:'100kb'}))
@@ -57,19 +62,23 @@ app.use(express.static('./public'))
 app.use("/uploads", express.static("./uploads"));
 
 //TOURE MIDLEWARE 
-app.use('/api/vi/tours',toureRoutes)
+app.use('/api/vi/tours',toureRoutes);
 //USER ROUTE
-app.use('/api/vi/users', userRoutes)
+app.use('/api/vi/users', userRoutes);
 //Post Route 
-app.use('/api/vi/post', postRoutes)
+app.use('/api/vi/post', postRoutes);
 // login routes 
-app.use('/api/vi/login', loginRoutes)
+app.use('/api/vi/login', loginRoutes);
 // Register Route
-app.use('/api/vi/register', resgisterRoutes)
+app.use('/api/vi/register', resgisterRoutes);
 // Blog Routes 
-app.use('/api/vi/blog', blogRoutes)
+app.use('/api/vi/blog', blogRoutes);
 // Review Routes
-app.use('/api/vi/review', reviewRoutes)
+app.use('/api/vi/review', reviewRoutes);
+// Booking  Routes
+app.use('/api/vi/bookings', bookingRoutes);
+// Feature Toure Routes
+app.use('/api/vi/featuretoure', ftRoutes);
 
 
 

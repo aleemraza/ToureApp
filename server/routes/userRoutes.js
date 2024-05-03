@@ -32,10 +32,7 @@ Routes.delete('/deleteMe', userControler.deleteMe)
  
 
 Routes.use(authControler.restrictTo('admin'))
-Routes.get('/' , userControler.getAllUser)
-      .post(userControler.createUser)
-Routes.get('/:id', userControler.getUser)
-      .patch(userControler.updateUser)
-      .delete(userControler.deleteUser)
+Routes.get('/' , userControler.getAllUser).post(userControler.createUser)
+Routes.get('/:id', userControler.getUser).patch(userControler.updateUser).delete(userControler.deleteUser)
       
 module.exports = Routes;

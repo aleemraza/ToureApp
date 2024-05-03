@@ -3,17 +3,24 @@ const AppError = require('../utils/appError')
 
 exports.createToure = async(req,res)=>{
     try{
-        const newTour = await Toure.create(req.body)
+        const imagePath = req.files['imageCover'] ? req.files['imageCover'][0].path : null;
+        const imagesPaths = req.files['images'] ? req.files['images'].map(file => file.path) : [];
+        const newTour = await Toure.create({
+            ...req.body,
+            imageCover:imagePath,
+            images:imagesPaths
+        })
         res.status(200).json({
             status:'sccuess',
             data:{
                 tour:newTour
             }
+            
     }) 
     }catch(eror){
         res.status(404).json({
             status:'failed',
-            message:eror
+            message:console.log("404 server eror", eror)
     }) 
     }
 } 

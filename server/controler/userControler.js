@@ -45,6 +45,15 @@ exports.updateMe = async(req,res,next)=>{
         }
     })
 }
+exports.deleteUser = async(req,res,next)=>{
+    try{
+        const id = req.params.id
+        console.log(`user id${id}`)
+        res.status(202).json({status:"seccuss", message:"user delete"})
+    }catch(eror){
+        console.log(eror)
+    }
+}
 exports.deleteMe = async(req,res,next)=>{
     await User.findByIdAndDelete(req.user.id, {active:false})
     res.status(204).json(
@@ -60,12 +69,6 @@ exports.createUser = (req,res,next)=>{
 exports.getUser = factory.getOne(User)
 
 exports.updateUser = (req,res,next)=>{
-    res.status(200).json({
-        status:'s',
-        message:"the routes is run"
-    })
-}
-exports.deleteUser = (req,res,next)=>{
     res.status(200).json({
         status:'s',
         message:"the routes is run"

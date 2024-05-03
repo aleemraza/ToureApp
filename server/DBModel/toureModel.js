@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const slugify = require('slugify')
 //const User = require('./userModel')
 const ToureSchema = new mongoose.Schema({
     name:{
@@ -7,10 +8,11 @@ const ToureSchema = new mongoose.Schema({
         required:[true, 'A Toure Must Have Name'],
         unique:true,
         trim:true,
+        minlength:[10,'the 10 character are required'],
         maxlength:[40,'the 40 character are required'],
-        minlength:[10,'the 40 character are required'],
-        validate: [validator.isAlpha ,'validator conatined only characters']
+        //validate: [validator.isAlpha ,'validator conatined only characters']
     },
+    slug: String,
     duration:{
         type:Number,
         required:[true, 'A Toure Must Have Duration'],   
@@ -21,7 +23,11 @@ const ToureSchema = new mongoose.Schema({
     },
     difficulty:{
         type:String,
-        required:[true, 'A Toure Must Have deficulty'],   
+        required:[true, 'A Toure Must Have deficulty'], 
+        enum: {
+            values: ['easy', 'medium', 'difficult'],
+            message: 'Difficulty is either: easy, medium, difficult'
+          } 
     },
     ratingsAverage:{
         type:Number,
@@ -62,34 +68,35 @@ const ToureSchema = new mongoose.Schema({
     },
     images: [String],
     createAt:{
-        type:Date,
-        default: Date.now()
+        type: Date,
+        default: Date.now(),
+        select: false
     },
     startDates : [Date],
-    startLocation:{
-        //jeo jason
-        type:{
-            type:String,
-            default:'Point',
-            enum: ['Point']
-        },
-        coordinates:[Number],
-        address:String,
-        description:String,
-    },
-    location:[
-        {
-            type:{
-                type:String,
-                default:'Point',
-                enum: ['Point']
-            },
-            coordinates:[Number],
-            address:String,
-            description:String,
-            day: Number
-        }
-    ],
+    // startLocation:{
+    //     //jeo jason
+    //     type:{
+    //         type:String,
+    //         default:'Point',
+    //         enum: ['Point']
+    //     },
+    //     coordinates:[Number],
+    //     address:String,
+    //     description:String,
+    // },
+    // locations: [
+    //     {
+    //       type: {
+    //         type: String,
+    //         default: 'Point',
+    //         enum: ['Point']
+    //       },
+    //       coordinates: [Number],
+    //       address: String,
+    //       description: String,
+    //       day: Number
+    //     }
+    //   ],
     guides : [
         {
             type: mongoose.Schema.ObjectId,
@@ -110,6 +117,22 @@ const ToureSchema = new mongoose.Schema({
     //this.guides = await Promise.all(guidesPromise)
     //next()
 //});
+
+// tourSchema.index({ price: 1 });
+ToureSchema.index({ price: 1, ratingsAverage: -1 });
+ToureSchema.index({ slug: 1 });
+ToureSchema.index({ startLocation: '2dsphere' });
+
+
+ToureSchema.virtual('durationWeeks').get(function() {
+    return this.duration / 7;
+  });
+
+ToureSchema.pre('save', function(next) {
+    this.slug = slugify(this.name, { lower: true });
+    next();
+  });
+
 ToureSchema.pre(/^find/, function(next){
     this.populate({
         path:'guides',

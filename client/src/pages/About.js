@@ -10,8 +10,10 @@ const About = () => {
   
   return (
     <Layouts>
-      <div>
-        <button onClick={notify}>Notify!</button>
+      <div className='flex basis-1/2'>
+       <div class="basis-1/4 bg-slate-600 text-center text-white">01</div>
+       <div class="basis-1/4 bg-slate-950 text-center text-white">02</div>
+       <div class="basis-1/2 bg-stone-300 text-center text-white">03</div>
       </div>
         <ToastContainer />
     </Layouts>

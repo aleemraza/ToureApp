@@ -17,6 +17,9 @@ const Register_Model = mongoose.Schema({
     password:{
         type :String,
         required:true
+    },
+    image:{
+
     }
     
 })
