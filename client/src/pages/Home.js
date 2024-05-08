@@ -482,7 +482,7 @@ const Home = () => {
   </div>
 </section>
 
-<section className='text-gray-600 body-font'>
+{/* <section className='text-gray-600 body-font'>
 <h1 className='font-serif text-5xl font-bold text-black mb-10'>Vist Our Customer Toure Gallary</h1>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
     <div class="grid gap-6">
@@ -531,7 +531,7 @@ const Home = () => {
     </div>
 </div>
 
-</section>
+</section> */}
 
 <section>
   

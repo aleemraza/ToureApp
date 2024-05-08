@@ -73,8 +73,6 @@ const Header = () => {
     setRefreshPage(true)
     navigate('/login')
   } 
-
-  
   return (
     <>
 <header class='flex flex-wrap shadow-md py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50'>
@@ -106,14 +104,6 @@ const Header = () => {
         <li class='max-lg:border-b border-gray-300 max-lg:py-3 px-3'>
           <Link to='/about' class='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>About</Link>
         </li>
-
-        <li class='max-lg:border-b border-gray-300 max-lg:py-3 px-3'>
-          <Link to='/booking' class='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>Booking</Link>
-        </li>
-
-
-
-
         {isLogedIn &&(
           <>
         <li class='max-lg:border-b border-gray-300 max-lg:py-3 px-3'>

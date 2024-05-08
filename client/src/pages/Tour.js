@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { ToastContainer, toast } from "react-toastify";
 import Layouts from '../components/layouts/Layouts'
 import img_4 from '../asset/mg3.jpg'
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 const token = localStorage.getItem('token')
 const Tour = () => {
-        const [tourData , setToureData] = useState([])
-        const navigate = useNavigate()
+    const [tourData , setToureData] = useState([])
+    const navigate = useNavigate()
     
     const ToureData = async()=>{
         try{
@@ -18,7 +19,6 @@ const Tour = () => {
             })
             if(res.ok){
                 const data = await res.json()
-                console.log(data)
                 setToureData(data.data.tours)
                 console.log(data.data.tours)
             }else{
@@ -31,8 +31,14 @@ const Tour = () => {
     useEffect(()=>{
         ToureData()
     },[])
-    const BookingPage = ()=>{
-        navigate('/booking')
+    const BookingPage = (id)=>{
+        if(!token){
+        toast.error("Please Login Book Tour!",{
+                position:"top-right"
+            })
+        }else{
+            navigate(`/booking/${id}`)
+        }
     }
   return (
     <Layouts>
@@ -43,12 +49,12 @@ const Tour = () => {
       <h2 class="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white m-24 text-center"> ALL TOURE </h2>
       </div>
     </div>
-<div className='grid gap-0 grid-cols-5 mt-6 ml-8 mr-8 mb-8'>
+<div className='grid gap-0 grid-cols-5 mt-6 ml-8 mr-8 mb-8'>  
     {tourData.map(data=>{
         return(
 <div class="bg-white rounded-lg overflow-hidden mt-5 ml-6">
 <div className='relative'>
-    <a href="/bookme">
+    <Link  to= {`/booking/${data.id}`}>
                     <img class="w-full"
                         src= {`http://127.0.0.1:8080/${data.imageCover}`}
                         alt="Sunset in the mountains"
@@ -56,14 +62,14 @@ const Tour = () => {
                     <div
                         class="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25">
                     </div>
-    </a>
+    </Link>
     
-                <a href="/bookme">
+           <Link to= {`/booking/${data.id}`}>
                     <div
                         class="text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
                         {data.difficulty}
                     </div>
-            </a>
+            </Link>
 </div> 
 <div class="bg-blue-50 p-6">
         <div class="flex items-baseline">
@@ -128,7 +134,7 @@ const Tour = () => {
                             </div>
                         </div>
                     </div>
-              <button  onClick={BookingPage} class="items-end rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
+              <button  onClick={()=> BookingPage(data.id)} class="items-end rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
               Book Ticket
             </button>
             </div>
@@ -137,6 +143,7 @@ const Tour = () => {
     </div>
         )
     })}
+    <ToastContainer />
     </div>  
 
 </section>

@@ -7,6 +7,7 @@ import User from './pages/User'
 import Tour from './pages/Tour';
 import Booking from './pages/Booking'
 import CreateToure from './pages/CreateToure';
+import BookingDone from './pages/BookingDone';
 function App() {
   return (
     <BrowserRouter>
@@ -17,8 +18,9 @@ function App() {
     <Route path="/about" element={<About/>} />
     <Route path="/tour" element={<Tour/>} />
     <Route path="/user" element={<User/>} />
-    <Route path="/booking" element={<Booking/>} />
+    <Route path="/booking/:id" element={<Booking/>} />
     <Route path='/createtoure' element={<CreateToure/>}/>
+    <Route path='/bookingdone' element={<BookingDone/>}/>
     </Routes>
     </>
     </BrowserRouter>

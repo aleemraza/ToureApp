@@ -128,6 +128,13 @@ ToureSchema.virtual('durationWeeks').get(function() {
     return this.duration / 7;
   });
 
+// Virtual populate
+ToureSchema.virtual('reviews', {
+    ref: 'Review',
+    foreignField: 'tour',
+    localField: '_id'
+  });  
+
 ToureSchema.pre('save', function(next) {
     this.slug = slugify(this.name, { lower: true });
     next();
@@ -142,11 +149,6 @@ ToureSchema.pre(/^find/, function(next){
 
 });
 //conected other fields 
-// Virtual populate
-ToureSchema.virtual('reviews', {
-    ref: 'Review',
-    foreignField: 'tour',
-    localField: '_id'
-  });
+
 const Toure = mongoose.model('Toure', ToureSchema)
 module.exports = Toure ;

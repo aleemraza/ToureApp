@@ -5,7 +5,8 @@ const Route = express.Router({mergeParams:true})
 
 Route.use(authCOntroler.protect)
 Route.route('/').get(reviewControler.getAllReview)
-.post(authCOntroler.restrictTo('user'), reviewControler.createReview)
+//authCOntroler.restrictTo('user'),
+.post(authCOntroler.restrictTo('user'),reviewControler.createReview)
 
 
 Route.route('/:id')

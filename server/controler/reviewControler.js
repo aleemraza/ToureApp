@@ -1,20 +1,30 @@
-const ReviewDB = require('../DBModel/reviewModel')
+const Review = require('../DBModel/reviewModel')
 
 exports.createReview = async(req,res)=>{
     try{
+        if (!req.user || req.user.role !== 'user') {
+            return res.status(403).json({
+                status: "Failed",
+                message: "You do not have permission to perform this action"
+            });
+        }
         if(!req.body.tour) req.body.tour = req.params.tourId
         if(!req.body.user) req.body.user = req.user.id
-        const createreview = await ReviewDB.create(req.body)
+
+        const createreview = await Review.create(req.body)
+        // console.log(createreview)
         res.status(200).json({
             status:"success",
             data:{
-                review: createreview
+                review: createreview,
+                results:createreview.length
             }
         })
     }catch(err){
+        console.log('Error:', err);
         res.status(404).json({
             status:"Failed",
-            message: err
+            message: `eror is faceing${err}`
         })
     }
 }
@@ -23,7 +33,7 @@ exports.getAllReview = async(req,res)=>{
         let filter = {}
         if(req.params.tourId) filter = {tour:req.params.tourId}
         console.log(filter)
-        const getallreview = await ReviewDB.find(filter)
+        const getallreview = await Review.find(filter)
         //console.log(getallreview)
         res.status(200).json({
             status:'success',
@@ -41,16 +51,20 @@ exports.getAllReview = async(req,res)=>{
 }
 exports.getReview = async(req,res)=>{
     try{
-        const getreview = await ReviewDB.findById(req.params.id)
+        const getreview = await Review.findById(req.params.id)
         if(!getreview){
-            res.status(204).json({status:'success', message:"user does not exist"})
+            return res.status(204).json(
+                {status:'success',
+                 message:"user does not exist"
+                })
+        }else{
+            return res.status(200).json({
+                status:'success',
+                data:{
+                   review:getreview
+                }
+            })
         }
-        res.status(200).json({
-            status:'success',
-            data:{
-               review:getreview
-            }
-        })
     }catch(err){
         res.status(404).json({
             status:"Failed",
@@ -61,7 +75,7 @@ exports.getReview = async(req,res)=>{
 }
 exports.updateReview = async(req,res)=>{
     try{
-        const updatereview = await ReviewDB.findByIdAndUpdate(req.params.id, req.body,{
+        const updatereview = await Review.findByIdAndUpdate(req.params.id, req.body,{
             new: true,
             runValidators:true
         })
@@ -80,7 +94,7 @@ exports.updateReview = async(req,res)=>{
 }
 exports.deleteReview = async(req,res)=>{
     try{
-       await  ReviewDB.findByIdAndDelete(req.params.id)
+       await  Review.findByIdAndDelete(req.params.id)
         res.status(204).json({
             status:'success',
             data:null

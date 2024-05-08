@@ -83,7 +83,10 @@ app.use('/api/vi/featuretoure', ftRoutes);
 
 
 app.all('*', (req,res,next)=>{
-    next(new AppError(`Cannot find ${req.originalUrl} On the Server`,404))
+    res.status(404).json({
+        status:"Failed",
+        message: `Cannot find ${req.originalUrl} On the Server`
+    })
 })
 app.use(golobalErrorHandler)
 

@@ -1,8 +1,8 @@
 const FeatureTour = require('../DBModel/FeatureTourModel')
-exports.createFeatureToure = (req,res)=>{
-    res.status(404).json({
-        status:"seccues",
-        message:"the api under buliding"
-    })
+const factory =  require('../controler/handelFactory')
 
-}
+
+
+//Create Feature Toure API Controler 
+exports.createFeatureToure = factory.createOne(FeatureTour)
+exports.getAllFeatureToure = factory.getAll(FeatureTour)

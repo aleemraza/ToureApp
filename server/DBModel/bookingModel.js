@@ -1,5 +1,9 @@
 const mangoose = require('mongoose')
 const bookingSchema = new mangoose.Schema({
+    name:{
+      type:String,
+      required:[true, 'Booking must Have Name!']
+    },
     tour:{
         type: mangoose.Schema.ObjectId,
         ref:"Toure",
@@ -21,7 +25,11 @@ const bookingSchema = new mangoose.Schema({
     paid: {
         type: Boolean,
         default: true
-      }
+      },
+    phone:{
+      type:Number,
+      require:[true, 'Booking Must have Number']
+    } 
 })
 
 bookingSchema.pre(/^find/, function(next) {
