@@ -38,7 +38,7 @@ ReviewSchema.pre(/^find/, function(next){
     //})
     this.populate({
         path:'user',
-        select:'name, phote'
+        select:'name phote'
     })
     next()
 })

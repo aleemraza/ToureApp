@@ -1,9 +1,11 @@
 import React ,{useState} from 'react'
+import { jwtDecode } from 'jwt-decode'
 import { ToastContainer, toast } from "react-toastify";
 import {useNavigate} from 'react-router-dom'
 import img from '../../asset/login.jpg'
 import '../../App.css'
 import 'react-toastify/dist/ReactToastify.css'
+
 const YOUR_PERSONAL_TOKEN = 'malikaleemraza'
 const SignUpValue = {
     name: '',
@@ -60,7 +62,7 @@ const Login = () => {
     formData.append('role', role);
     formData.append('password', password);
     formData.append('passwordConform', passwordConform);
-    console.log(formData.name)
+    //console.log(formData.name)
     const res = await fetch('http://127.0.0.1:8080/api/vi/users/signup', {
         method:"POST",
         headers:{
@@ -120,11 +122,17 @@ const Login = () => {
             const { token } = res_login;
             console.log('Received token:', token);
             localStorage.setItem('token', token);
+            const decode = jwtDecode(token)
+            const userRole = decode.role;
             toast.success("login successfully !",{
                 position:"top-right"
             })
             setTimeout(()=>{
-                navgate('/')
+            if (userRole === 'admin') {
+                navgate('/dashboard'); 
+            } else {
+                navgate("/"); 
+            }
             },1000)
         }else{
             console.error('Login  failed:', res_login.error);

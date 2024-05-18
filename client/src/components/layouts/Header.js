@@ -48,7 +48,7 @@ const Header = () => {
     if(res.ok){
       const info_user =  await res.json()
       setUserProfile(info_user.data.data)
-      console.log(info_user) 
+      //console.log(info_user) 
     }else{
       setIsLogrdIn(false);
       toast.error("Failed to fetch user data");
@@ -104,17 +104,6 @@ const Header = () => {
         <li class='max-lg:border-b border-gray-300 max-lg:py-3 px-3'>
           <Link to='/about' class='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>About</Link>
         </li>
-        {isLogedIn &&(
-          <>
-        <li class='max-lg:border-b border-gray-300 max-lg:py-3 px-3'>
-          <Link to="/user" class='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>User</Link>
-        </li>
-        <li class='max-lg:border-b border-gray-300 max-lg:py-3 px-3'>
-          <Link to='/createtoure' class='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>Create Toure</Link>
-        </li>
-          </>
-        )}
-    
         <li class='max-lg:border-b border-gray-300 max-lg:py-3 px-3'>
           <Link to="/tour"
             class='hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>Toure</Link>

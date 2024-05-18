@@ -23,7 +23,6 @@ const Booking = () => {
   const [hover, setHover] = useState(null)
   const [message, setMessage] = useState(reviews)
   const [tourReview, setTourReview] = useState([])
-  const [userName , setUserName] = useState(null)
   const [bookingTour , setBookingTour] = useState(booking)
   const [price, setPrice] = useState(0)
   const  navigate = useNavigate()
@@ -37,12 +36,6 @@ const Booking = () => {
 //Use Effect Funcation  
   useEffect(()=>{
     getBooking()
-    if(token){
-      const decode = jwtDecode(token)
-      setUserName({name:decode.name})
-    }else{
-      setUserName(null)
-    }
     setPrice(toureData.price*5 - toureData.priceDiscount)
   },[toureData.price*5 - toureData.priceDiscount])
 
@@ -148,9 +141,11 @@ const Booking = () => {
     }
 
   }
-  console.log(tourReview)
-  console.log(toureData)
-  console.log(price)
+
+  
+  //console.log(tourReview)
+  // console.log(toureData)
+  // console.log(price)
   const BookingDone = (e)=>{
     navigate(e)
   }
@@ -214,11 +209,11 @@ const Booking = () => {
                         <img src={`http://localhost:8080/${item.user.phote}`}
                                 class="object-cover w-10 h-10 rounded-full border-2 border-emerald-400  shadow-emerald-400" />
                         <div class="font-medium text-purple-800">
-                        <h3 class="font-bold">
-                          {userName.name}
-                            <br></br>
+                        {item.user.name}
+                        <div>
+                        
+                          </div>
                             <span class="text-sm text-gray-400 font-normal">{item.rating} Rating </span>
-                        </h3>
                         </div>
                         
                     </div> 

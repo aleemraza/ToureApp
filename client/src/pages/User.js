@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Layouts from '../components/layouts/Layouts'
 import { jwtDecode } from 'jwt-decode'
+import {useData} from '../components/layouts/DataContext'
 const token = localStorage.getItem('token');
 const User = () => {
     const [userData, setUserData] = useState([])
@@ -9,6 +10,7 @@ const User = () => {
     const [curentPage , setCurrentPage] = useState(1)
     const [totalResults , setTotalResults] = useState(0)
     const [isAdmin, setIsAdmin] = useState(false)
+    const {UpdatetotalUserData} = useData();
     const resultsPerPage = 10;
 // get all user data     
     const User_data = async()=>{
@@ -16,7 +18,8 @@ const User = () => {
             const res = await fetch('http://127.0.0.1:8080/api/vi/users',{
                 method:"GET",
                 headers:{
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
                 },
                 body:JSON.stringify()   
             })
@@ -24,9 +27,10 @@ const User = () => {
                 console.log("daataaaaaa")
             }
             const data = await res.json()
-            //console.log(data)
+            console.log(data)
             setUserData(data.data.user)
             setTotalResults(data.results)
+            UpdatetotalUserData(data.results)
         }catch(error){
             console.log("somethink is wrong")
         }
@@ -52,7 +56,7 @@ const User = () => {
             setCurrentUser(null)
         }
         setLoading(false);
-    },[curentPage])
+    },[curentPage,UpdatetotalUserData])
 
 
     // DELETE USER FROM API
@@ -91,10 +95,8 @@ const User = () => {
     if(!isAdmin){
         return <p>You are not authorized to access this page.</p>;
     }
-
   return (
-    <Layouts>
-
+    <>
 <div className="flex flex-row m-10">
 <div className="basis-1/5">
 <div className="flex items-center justify-center mt-32">
@@ -229,7 +231,7 @@ const User = () => {
             </div>
             
 </div>
-    </Layouts>
+    </>
   )
 }
 export default User

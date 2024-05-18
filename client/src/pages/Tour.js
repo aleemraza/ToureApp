@@ -3,11 +3,12 @@ import { ToastContainer, toast } from "react-toastify";
 import Layouts from '../components/layouts/Layouts'
 import img_4 from '../asset/mg3.jpg'
 import {Link, useNavigate} from 'react-router-dom'
+import {useData} from '../components/layouts/DataContext'
 const token = localStorage.getItem('token')
 const Tour = () => {
     const [tourData , setToureData] = useState([])
     const navigate = useNavigate()
-    
+    const {Update_Total_Tour} = useData()
     const ToureData = async()=>{
         try{
             const res = await fetch('http://127.0.0.1:8080/api/vi/tours',{
@@ -20,7 +21,8 @@ const Tour = () => {
             if(res.ok){
                 const data = await res.json()
                 setToureData(data.data.tours)
-                console.log(data.data.tours)
+                Update_Total_Tour(data)
+                //console.log(data.data.tours)
             }else{
                 console.log("res is not ok status")
             }
@@ -30,7 +32,7 @@ const Tour = () => {
     }
     useEffect(()=>{
         ToureData()
-    },[])
+    },[Update_Total_Tour])
     const BookingPage = (id)=>{
         if(!token){
         toast.error("Please Login Book Tour!",{

@@ -78,15 +78,9 @@ const uploadImage = (e)=>{
         }
     }
     return (
-    <Layouts>
-       <section className='text-gray-600 body-font'>
-        <div className='flex flex-wrap'>
-        <div className='basis-52'>
-        </div>  
-        <div className='basis-4/5'>
-        <div className="flex items-center justify-center p-12">
-    <div className="mx-auto w-full max-w-[550px] bg-white">
-        <form method='post' onSubmit={ToureSubmit} enctype="multipart/form-data" action="/uploads">
+    <>
+<div>
+<form method='post' onSubmit={ToureSubmit} enctype="multipart/form-data" action="/uploads">
             <div className="mb-5">
                 <label htmlFor="name" className="mb-3 block text-base font-medium text-[#07074D]">Full Name</label>
                 <input onChange={(e)=> ToureInputValue(e)} type="text" name="name" id="name" placeholder="Full Name"
@@ -273,17 +267,9 @@ const uploadImage = (e)=>{
                 </button>
             </div>
         </form>
-    </div>
 </div>
 
-
-        </div>
-        <div className='basis-12'>
-        </div>    
- 
-        </div>
-       </section>
-    </Layouts>
+    </>
   )
 }
 

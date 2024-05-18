@@ -1,8 +1,9 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 const Footer = () => {
   return (
     <>
-    <footer class="font-[sans-serif] bg-black p-10">
+    {/* <footer class="font-[sans-serif] bg-black p-10">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-8">
         <div class="xl:col-span-2">
           <a href="/"><img src="https://readymadeui.com/readymadeui-white.svg" alt="logo" class='w-48' /></a>
@@ -169,7 +170,71 @@ const Footer = () => {
         <p class='text-gray-300 text-sm ml-auto max-md:mt-5'>Copyright © 2023<a href='https://readymadeui.com/'
           target='_blank' class="hover:underline mx-1">ReadymadeUI</a>All Rights Reserved.</p>
       </div>
-    </footer>
+    </footer> */}
+<hr class="my-6 border-blueGray-300"/>    
+<footer class="relative bg-blueGray-200 pt-8 pb-6">
+  <div class="mx-auto px-4">
+    <div class="flex flex-wrap text-left lg:text-left">
+      <div class="w-full lg:w-6/12 px-4">
+        <h4 class="text-3xl fonat-semibold text-blueGray-700">World Traveling</h4>
+        <h5 class="text-lg mt-0 mb-2 text-blueGray-600">
+        Traveling with loved ones, friends, or even fellow adventurers fosters a bond through shared experiences
+        </h5>
+        <div class="mt-6 lg:mb-0 mb-6">
+          <button class="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+            <i class="fab fa-twitter"></i></button><button class="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+            <i class="fab fa-facebook-square"></i></button><button class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+            <i class="fab fa-dribbble"></i></button><button class="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+            <i class="fab fa-github"></i>
+          </button>
+        </div>
+      </div>
+      <div class="w-full lg:w-6/12 px-4">
+        <div class="flex flex-wrap items-top mb-6">
+          <div class="w-full lg:w-4/12 px-4 ml-auto">
+            <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Useful Links</span>
+            <ul class="list-unstyled">
+              <li>
+                <Link class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" to={'/about'}>About Us</Link>
+              </li>
+              <li>
+                <Link class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" to={'/tour'}>Tour</Link>
+              </li>
+            </ul>
+          </div>
+          <div class="w-full lg:w-4/12 px-4">
+            <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Other Resources</span>
+            <ul class="list-unstyled">
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-profile">MIT License</a>
+              </li>
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/terms?ref=njs-profile">Terms &amp; Conditions</a>
+              </li>
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/privacy?ref=njs-profile">Privacy Policy</a>
+              </li>
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/contact-us?ref=njs-profile">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="my-6 border-blueGray-300"/>
+
+    <div class="flex flex-wrap items-center md:justify-between justify-center">
+      <div class="w-full md:w-4/12 px-4 mx-auto text-center">
+        <div class="text-sm text-blueGray-500 font-semibold py-1">
+          Copyright © <span id="get-current-year">2024</span>
+          <a href="/" class="text-blueGray-500 hover:text-gray-800" target="_blank"/> Coding Brain by 
+          <a href="/" class="text-blueGray-500 hover:text-blueGray-800">Creative Aleem Raza</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
     </>
   )
 }
