@@ -1,7 +1,13 @@
 //Create API
 exports.createOne = Model => async(req,res,next)=>{
   try{
-    const doc = await Model.create(req.body)
+    const imagePath = req.files['imageCover'] ? req.files['imageCover'][0].path : null;
+    const imagesPaths = req.files['images'] ? req.files['images'].map(file => file.path) : [];
+    const doc = await Model.create({
+            ...req.body,
+            imageCover:imagePath,
+            images:imagesPaths
+    })
     return res.status(202).json({
       status:"Seccuess",
       data:{
@@ -15,6 +21,7 @@ exports.createOne = Model => async(req,res,next)=>{
     })
   }
 };
+
 //GET ONE RECORD API
 exports.getOne = (Model, popOptions) => async (req, res, next) => {
   try{
@@ -43,9 +50,9 @@ exports.getOne = (Model, popOptions) => async (req, res, next) => {
 };
 //GET ALL DOCMENTS API
 exports.getAll = Model => async(req,res)=>{
-  console.log(Model)
+  //console.log(Model)
   const doc = await Model.find();
-  console.log(doc)
+ // console.log(doc)
   try{
     const doc = await Model.find();
     res.status(202).json({

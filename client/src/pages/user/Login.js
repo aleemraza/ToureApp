@@ -11,7 +11,6 @@ const SignUpValue = {
     name: '',
     email: '',
     phote: null,
-    role: '',
     password : '',
     passwordConform:'',
   }
@@ -53,13 +52,12 @@ const Login = () => {
   const SignUpform = async(e)=>{
     e.preventDefault()
     console.log(signup)
-    const {name,email, phote, role,password,passwordConform} = signup;
+    const {name,email, phote,password,passwordConform} = signup;
     const formData = new FormData();
     // Append form fields to FormData object
     formData.append('name', name);
     formData.append('email', email);
     formData.append('phote', phote);
-    formData.append('role', role);
     formData.append('password', password);
     formData.append('passwordConform', passwordConform);
     //console.log(formData.name)
@@ -203,7 +201,7 @@ const Login = () => {
                       <input type="file" onChange={(e)=> handleImageChange(e)}  name="phote" id="phote" className="backdrop-blur-sm hover:backdrop-blur-lg bg-white/30 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="file upload" />
                   </div>
             
-                  <div>
+                  {/* <div>
                   <label htmlFor="role" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
                   <select id="role" onChange={(e)=> InputSignUp(e)}  name='role' className="backdrop-blur-sm hover:backdrop-blur-lg bg-white/30 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                   <option>user</option>
@@ -211,7 +209,7 @@ const Login = () => {
                   <option>lead-guide</option>
                    <option>admin</option>
                     </select>                  
-                  </div>
+                  </div> */}
                   <div>
                       <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                       <input type="password" onChange={(e)=> InputSignUp(e)}  name="password" id="password" placeholder="••••••••" className="backdrop-blur-sm hover:backdrop-blur-lg bg-white/30 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />

@@ -11,6 +11,7 @@ import BookingDone from './pages/BookingDone';
 import Deshboard from './pages/Deshboard';
 import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode'
+import DetailsFeatureTour from './pages/DetailsFeatureTour';
 const token = localStorage.getItem('token')
 function App() {
   const [userRole , setUserRole] = useState(null)
@@ -49,6 +50,7 @@ function App() {
     <Route path="/booking/:id" element={<Booking/>} />
     <Route path='/createtoure' element={<CreateToure/>}/>
     <Route path='/bookingdone' element={<BookingDone/>}/>
+    <Route path='/dft/:id'  element={<DetailsFeatureTour/>}/>
     </Routes>
     </>
     </BrowserRouter>

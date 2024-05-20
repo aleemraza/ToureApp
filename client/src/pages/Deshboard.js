@@ -2,7 +2,9 @@ import React,{useEffect, useState} from 'react'
 import TeamPage from './TeamPage';
 import CreateToure from './CreateToure';
 import Booking from '../pages/adminPages/Booking'
+import CreateFeatureTour from '../pages/adminPages/CreateFeatureTour'
 import User from './User'
+import  '../App.css'
 import {useNavigate} from 'react-router-dom'
 import {jwtDecode} from 'jwt-decode'
 import {useData} from '../components/layouts/DataContext'
@@ -22,7 +24,6 @@ const Deshboard = () => {
     }
     
   },[shareData,toteluser,toteltour])
-
   //Logout Api
   const logout = async()=>{
     try{
@@ -57,15 +58,67 @@ const Deshboard = () => {
       case "User":
         return <User/>
       case "Booking":
-        return <Booking/>    
+        return <Booking/>
+      case "CreateFeatureTour":
+        return <CreateFeatureTour/>     
       case 'dashboard':
         return (
-          <div>
-            <h2 className="text-gray-800 text-lg font-semibold">Dashboard</h2>
-            <p className="text-gray-600 mt-2">wellcome to our  world</p>
-            <p>Total Booking {shareData}</p>
-            <p>Total User : {toteluser}</p>
-          </div>
+          <>
+<div class="grid xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 ">
+<div class="homeGrid">
+ <div class="w-[50px] h-[50px] flex justify-center items-center bg-[#EFF2F7] rounded-full"><i class="fa-regular fa-eye text-[#3C50E0]"></i></div>
+ <div class="flex justify-between items-end">
+         <div>
+             <h3 class="text-[25px] text-gray-800">{toteluser}</h3>
+             <p class="text-[15px] text-slate-600">Total User</p>
+         </div>
+         <div>
+             <p class="text-[16px] text-green-600 font-thin"> 0.98 % <i class="fa-solid fa-arrow-up"></i></p>
+         </div>
+ </div>
+</div>
+
+ <div class="homeGrid">
+ <div class="w-[50px] h-[50px] flex justify-center items-center bg-[#EFF2F7] rounded-full"><i class="fa-solid fa-cart-shopping text-[#3C50E0]"></i></div>
+ <div class="flex justify-between items-end">
+         <div>
+             <h3 class="text-[25px] text-gray-800">{shareData}</h3>
+             <p class="text-[15px] text-slate-600">Total Booking</p>
+         </div>
+         <div>
+             <p class="text-[16px] text-green-600 font-thin"> 2.38 % <i class="fa-solid fa-arrow-up"></i></p>
+         </div>
+ </div>
+</div>
+
+ <div class="homeGrid">
+ <div class="w-[50px] h-[50px] flex justify-center items-center bg-[#EFF2F7] rounded-full"><i class="fa-solid fa-plane-circle-check text-[#3C50E0]"></i></div>
+ <div class="flex justify-between items-end">
+         <div>
+             <h3 class="text-[25px] text-gray-800">29</h3>
+             <p class="text-[15px] text-slate-600">Delivery</p>
+         </div>
+         <div>
+             <p class="text-[16px] text-green-600 font-thin"> 0.88 % <i class="fa-solid fa-arrow-up"></i></p>
+         </div>
+ </div>
+</div>
+
+<div class="homeGrid">
+ <div class="w-[50px] h-[50px] flex justify-center items-center bg-[#EFF2F7] rounded-full"><i class="fa-solid fa-user-group text-[#3C50E0]"></i></div>
+ <div class="flex justify-between items-end">
+         <div>
+             <h3 class="text-[25px] text-gray-800">{toteltour}</h3>
+             <p class="text-[15px] text-slate-600">Total Tour</p>
+         </div>
+         <div>
+             <p class="text-[16px] text-green-600 font-thin"> 12.98 % <i class="fa-solid fa-arrow-up"></i></p>
+         </div>
+ </div>
+</div>
+</div>
+          </>  
+          
         );
       // Add cases for other pages as needed
       default:
@@ -109,6 +162,8 @@ const Deshboard = () => {
             <button onClick={() => handlePageChange('CreateToure')} className="block py-2 px-4 text-gray-400 hover:bg-gray-700 hover:text-white">CreateToure</button>
             <button onClick={() => handlePageChange('User')} className="block py-2 px-4 text-gray-400 hover:bg-gray-700 hover:text-white">User</button>
             <button onClick={() => handlePageChange('Booking')} className="block py-2 px-4 text-gray-400 hover:bg-gray-700 hover:text-white">Booking</button>
+            <button onClick={() => handlePageChange('CreateFeatureTour')} className="block py-2 px-4 text-gray-400 hover:bg-gray-700 hover:text-white">Feature Tour</button>
+            
             {/* Add other navigation links */}
           </nav>
         </div>

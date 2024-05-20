@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layouts from '../components/layouts/Layouts'
+import {Link, useNavigate} from 'react-router-dom'
 import img_1 from '../asset/mg1.jpg'
 import img_2 from '../asset/mg2.jpg'
 import img_3 from '../asset/mg3.jpg'
@@ -20,6 +21,39 @@ import g13 from '../asset/g13.jpg'
 import profile from '../asset/ex.png'
 import '../App.css'
 const Home = () => {
+  const [fTour, setfTour] = useState([])
+  const navigate = useNavigate()
+  useEffect(()=>{
+    FeatureTour()
+
+  },[])
+//Fetech Feature Tour data from API 
+  const FeatureTour = async()=>{
+    try{
+      const res = await fetch('http://127.0.0.1:8080/api/vi/featuretoure',{
+        method:"GET",
+        headers:{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+      },
+      body: JSON.stringify()
+      });
+      if(res.ok){
+        const data = await res.json()
+        if(data){
+          console.log(data.data.data)
+          setfTour(data.data.data)
+        }else{
+          console.log("Error During Fetech Data")
+        }
+      }
+    }catch(error){
+      console.log("Error in fetch data")
+    }
+  }
+  const detailsPage = (id)=>{
+    navigate(`/dft/${id}`)
+  }
   return (
 <Layouts>
  <div className='flex flex-wrap'>
@@ -86,369 +120,95 @@ const Home = () => {
 
 <section className='text-gray-600 body-font'>
 <h1 className='font-serif text-5xl font-bold text-black'>Our Feature Toure</h1>
-<div class="grid gap-0 grid-cols-5 mt-6">
-  <div>
-  <div class="bg-white rounded-lg overflow-hidden shadow-2xl h-96 w-80">
-      <img class="h-48 w-full object-cover object-end" src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80" alt="Home in Countryside" />
-      <div class="p-6">
-        <div class="flex items-baseline">
-          <span class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
-          <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
-            3 beds &bull; 2 baths
-          </div>
-        </div>
-        <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Beautiful Home in the countryside</h4>
-        <div class="mt-1">
-          <span>$1,900.00</span>
-          <span class="text-gray-600 text-sm">/ wk</span>
-        </div>
-        <div class="mt-2 flex items-center">
-          <span class="text-teal-600 font-semibold">
-            <span>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              </span>
-            </span>  
-            <span class="ml-2 text-gray-600 text-sm">34 reviews</span>
-        </div>
-        <div className='mt-2 float-right'>
-        <button class="items-end rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
-         Book Now
-        </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div>
-  <div class="bg-white rounded-lg overflow-hidden shadow-2xl h-96 w-80">
-      <img class="h-48 w-full object-cover object-end" src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80" alt="Home in Countryside" />
-      <div class="p-6">
-        <div class="flex items-baseline">
-          <span class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
-          <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
-            3 beds &bull; 2 baths
-          </div>
-        </div>
-        <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Beautiful Home in the countryside</h4>
-        <div class="mt-1">
-          <span>$1,900.00</span>
-          <span class="text-gray-600 text-sm">/ wk</span>
-        </div>
-        <div class="mt-2 flex items-center">
-          <span class="text-teal-600 font-semibold">
-            <span>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              </span>
-            </span>  
-              <span class="ml-2 text-gray-600 text-sm">34 reviews</span>
-        </div>
-        <div className='mt-2 float-right'>
-        <button class="items-end rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
-         Book Now
-        </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div>
-  <div class="bg-white rounded-lg overflow-hidden shadow-2xl h-96 w-80">
-      <img class="h-48 w-full object-cover object-end" src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80" alt="Home in Countryside" />
-      <div class="p-6">
-        <div class="flex items-baseline">
-          <span class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
-          <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
-            3 beds &bull; 2 baths
-          </div>
-        </div>
-        <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Beautiful Home in the countryside</h4>
-        <div class="mt-1">
-          <span>$1,900.00</span>
-          <span class="text-gray-600 text-sm">/ wk</span>
-        </div>
-        <div class="mt-2 flex items-center">
-          <span class="text-teal-600 font-semibold">
-            <span>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              </span>
-            </span>  
-              <span class="ml-2 text-gray-600 text-sm">34 reviews</span>
-        </div>
-        <div className='mt-2 float-right'>
-        <button class="items-end rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
-         Book Now
-        </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div>
-  <div class="bg-white rounded-lg overflow-hidden shadow-2xl h-96 w-80">
-      <img class="h-48 w-full object-cover object-end" src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80" alt="Home in Countryside" />
-      <div class="p-6">
-        <div class="flex items-baseline">
-          <span class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
-          <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
-            3 beds &bull; 2 baths
-          </div>
-        </div>
-        <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Beautiful Home in the countryside</h4>
-        <div class="mt-1">
-          <span>$1,900.00</span>
-          <span class="text-gray-600 text-sm">/ wk</span>
-        </div>
-        <div class="mt-2 flex items-center">
-          <span class="text-teal-600 font-semibold">
-            <span>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              </span>
-            </span>  
-              <span class="ml-2 text-gray-600 text-sm">34 reviews</span>
-        </div>
-        <div className='mt-2 float-right'>
-        <button class="items-end rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
-         Book Now
-        </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div>
-  <div class="bg-white rounded-lg overflow-hidden shadow-2xl h-96 w-80">
-      <img class="h-48 w-full object-cover object-end" src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80" alt="Home in Countryside" />
-      <div class="p-6">
-        <div class="flex items-baseline">
-          <span class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
-          <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
-            3 beds &bull; 2 baths
-          </div>
-        </div>
-        <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Beautiful Home in the countryside</h4>
-        <div class="mt-1">
-          <span>$1,900.00</span>
-          <span class="text-gray-600 text-sm">/ wk</span>
-        </div>
-        <div class="mt-2 flex items-center">
-          <span class="text-teal-600 font-semibold">
-            <span>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              </span>
-            </span>  
-              <span class="ml-2 text-gray-600 text-sm">34 reviews</span>
-        </div>
-        <div className='mt-2 float-right'>
-        <button class="items-end rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
-         Book Now
-        </button>
-        </div>
-      </div>
-    </div>
-  </div>
+<div className='grid gap-0 grid-cols-5'> 
+{fTour.map((data,index)=>{
+  return( 
+<div class="bg-white rounded-lg overflow-hidden mt-5 ml-6" key={index}>
+<div className='relative' >
+                    <img class="w-full"
+                        src= {`http://127.0.0.1:8080/${data.imageCover}`}
+                        alt="Sunset in the mountains"
+                        className='h-96 w-96'/>
+                    <div
+                        class="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25">
+                    </div>
     
-  </div>
+</div> 
+<div class="bg-blue-50 p-6">
+        <div class="flex items-baseline">
+          <span class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">Group</span>
+          <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
+           {data.roome} &bull; Roome / {data.beds} &bull; Beds
+          </div>
+        </div>
+        <h4 class="mt-2 font-semibold text-lg leading-tight truncate">{data.name}</h4>
 
-  <div class="grid gap-0 grid-cols-5 mt-8">
-  <div>
-  <div class="bg-white rounded-lg overflow-hidden shadow-2xl h-96 w-80">
-      <img class="h-48 w-full object-cover object-end" src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80" alt="Home in Countryside" />
-      <div class="p-6">
-        <div class="flex items-baseline">
-          <span class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
-          <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
-            3 beds &bull; 2 baths
-          </div>
-        </div>
-        <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Beautiful Home in the countryside</h4>
         <div class="mt-1">
-          <span>$1,900.00</span>
-          <span class="text-gray-600 text-sm">/ wk</span>
+          <span>${data.price}</span>
+          <span class="text-gray-600 text-sm">/ {data.duration}  Days</span>
+        </div>
+        <div class="mt-2 flex items-end">
+            <span class="ml-2 text-gray-600 text-sm">  {data.maxGroupSize} Person</span>
         </div>
         <div class="mt-2 flex items-center">
-          <span class="text-teal-600 font-semibold">
-            <span>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              </span>
-            </span>  
-              <span class="ml-2 text-gray-600 text-sm">34 reviews</span>
+        <span class="ml-2 text-gray-600 text-sm">{data.description.length > 250 ?  `${data.description.substring(0, 250)}...` : data.description }</span>
         </div>
-        <div className='mt-2 float-right'>
-        <button class="items-end rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
-         Book Now
-        </button>
+        <div className='bg-blue-50'>
+            <div className='sm:flex sm:justify-between'>
+                  <div>
+                        <div class="text-lg text-gray-700">
+                           <span class="text-gray-900 font-bold">Price Discount {data.price} </span> $ 
+                        </div>
+                        <div class="flex items-center">
+                            <div class="flex">
+                                <svg class="w-4 h-4 mx-px fill-current text-green-600"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+                                    <path
+                                        d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4 mx-px fill-current text-green-600"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+                                    <path
+                                        d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4 mx-px fill-current text-green-600"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+                                    <path
+                                        d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4 mx-px fill-current text-green-600"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+                                    <path
+                                        d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
+                                    </path>
+                                </svg>
+                                <svg class="w-4 h-4 mx-px fill-current text-green-600"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+                                    <path
+                                        d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="text-gray-600 ml-2 text-sm md:text-base mt-1">
+                                16 reviews
+                            </div>
+                        </div>
+                    </div>
+              <button  onClick={()=> detailsPage(data._id)}  class="items-end rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
+              Details
+            </button>
+            </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div>
-  <div class="bg-white rounded-lg overflow-hidden shadow-2xl h-96 w-80">
-      <img class="h-48 w-full object-cover object-end" src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80" alt="Home in Countryside" />
-      <div class="p-6">
-        <div class="flex items-baseline">
-          <span class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
-          <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
-            3 beds &bull; 2 baths
-          </div>
-        </div>
-        <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Beautiful Home in the countryside</h4>
-        <div class="mt-1">
-          <span>$1,900.00</span>
-          <span class="text-gray-600 text-sm">/ wk</span>
-        </div>
-        <div class="mt-2 flex items-center">
-          <span class="text-teal-600 font-semibold">
-            <span>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              </span>
-            </span>  
-              <span class="ml-2 text-gray-600 text-sm">34 reviews</span>
-        </div>
-        <div className='mt-2 float-right'>
-        <button class="items-end rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
-         Book Now
-        </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div>
-  <div class="bg-white rounded-lg overflow-hidden shadow-2xl h-96 w-80">
-      <img class="h-48 w-full object-cover object-end" src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80" alt="Home in Countryside" />
-      <div class="p-6">
-        <div class="flex items-baseline">
-          <span class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
-          <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
-            3 beds &bull; 2 baths
-          </div>
-        </div>
-        <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Beautiful Home in the countryside</h4>
-        <div class="mt-1">
-          <span>$1,900.00</span>
-          <span class="text-gray-600 text-sm">/ wk</span>
-        </div>
-        <div class="mt-2 flex items-center">
-          <span class="text-teal-600 font-semibold">
-            <span>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              </span>
-            </span>  
-              <span class="ml-2 text-gray-600 text-sm">34 reviews</span>
-        </div>
-        <div className='mt-2 float-right'>
-        <button class="items-end rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
-         Book Now
-        </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div>
-  <div class="bg-white rounded-lg overflow-hidden shadow-2xl h-96 w-80">
-      <img class="h-48 w-full object-cover object-end" src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80" alt="Home in Countryside" />
-      <div class="p-6">
-        <div class="flex items-baseline">
-          <span class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
-          <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
-            3 beds &bull; 2 baths
-          </div>
-        </div>
-        <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Beautiful Home in the countryside</h4>
-        <div class="mt-1">
-          <span>$1,900.00</span>
-          <span class="text-gray-600 text-sm">/ wk</span>
-        </div>
-        <div class="mt-2 flex items-center">
-          <span class="text-teal-600 font-semibold">
-            <span>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              </span>
-            </span>  
-              <span class="ml-2 text-gray-600 text-sm">34 reviews</span>
-        </div>
-        <div className='mt-2 float-right'>
-        <button class="items-end rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
-         Book Now
-        </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div>
-  <div class="bg-white rounded-lg overflow-hidden shadow-2xl h-96 w-80">
-      <img class="h-48 w-full object-cover object-end" src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80" alt="Home in Countryside" />
-      <div class="p-6">
-        <div class="flex items-baseline">
-          <span class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
-          <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
-            3 beds &bull; 2 baths
-          </div>
-        </div>
-        <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Beautiful Home in the countryside</h4>
-        <div class="mt-1">
-          <span>$1,900.00</span>
-          <span class="text-gray-600 text-sm">/ wk</span>
-        </div>
-        <div class="mt-2 flex items-center">
-          <span class="text-teal-600 font-semibold">
-            <span>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              </span>
-            </span>  
-              <span class="ml-2 text-gray-600 text-sm">34 reviews</span>
-        </div>
-        <div className='mt-2 float-right'>
-        <button class="items-end rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
-         Book Now
-        </button>
-        </div>
-      </div>
-    </div>
-  </div>
+       )
+})} 
     
-  </div>
+    </div>  
+  
 </section>
 
 <section class="text-gray-600 body-font">

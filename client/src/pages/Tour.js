@@ -9,28 +9,28 @@ const Tour = () => {
     const [tourData , setToureData] = useState([])
     const navigate = useNavigate()
     const {Update_Total_Tour} = useData()
-    const ToureData = async()=>{
-        try{
-            const res = await fetch('http://127.0.0.1:8080/api/vi/tours',{
-                method:"GET",
-                headers:{
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify()
-            })
-            if(res.ok){
-                const data = await res.json()
-                setToureData(data.data.tours)
-                Update_Total_Tour(data)
-                //console.log(data.data.tours)
-            }else{
-                console.log("res is not ok status")
-            }
-        }catch(eror){
-            console.log("The error is fatch this api")
-        }
-    }
     useEffect(()=>{
+        const ToureData = async()=>{
+            try{
+                const res = await fetch('http://127.0.0.1:8080/api/vi/tours',{
+                    method:"GET",
+                    headers:{
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify()
+                })
+                if(res.ok){
+                    const data = await res.json()
+                    setToureData(data.data.tours)
+                    Update_Total_Tour(data)
+                    //console.log(data.data.tours)
+                }else{
+                    console.log("res is not ok status")
+                }
+            }catch(eror){
+                console.log("The error is fatch this api")
+            }
+        }
         ToureData()
     },[Update_Total_Tour])
     const BookingPage = (id)=>{
